@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-z@c$!he5xpnv*%dvwkel5^y9$fnsc(ihulb#cz_(@!qk(qr&e5
 
 # Application definition
 
-INSTALLED_APPS = [
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -32,6 +32,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+DRF_GUITARS_APPS = [
+    'drfguitars.brands.apps.BrandsConfig',
+    'drfguitars.guitars.apps.GuitarsConfig',
+    'drfguitars.users.apps.UsersConfig',
+]
+
+INSTALLED_APPS = DJANGO_APPS + DRF_GUITARS_APPS
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -104,3 +113,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# CUSTOM USERS CONFIG
+AUTH_USER_MODEL = 'users.User'
