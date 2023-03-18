@@ -33,13 +33,17 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 
+THIRD_PARTY_APP = [
+    'rest_framework'
+]
+
 DRF_GUITARS_APPS = [
     'drfguitars.brands.apps.BrandsConfig',
     'drfguitars.guitars.apps.GuitarsConfig',
     'drfguitars.users.apps.UsersConfig',
 ]
 
-INSTALLED_APPS = DJANGO_APPS + DRF_GUITARS_APPS
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APP + DRF_GUITARS_APPS
 
 
 MIDDLEWARE = [
