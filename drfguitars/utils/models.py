@@ -33,3 +33,6 @@ class NamedModel(AuditedModel):
     class Meta(AuditedModel.Meta):
         abstract = True
         ordering = ['name', '-created', '-modified']
+
+    def __str__(self):
+        return self.name
