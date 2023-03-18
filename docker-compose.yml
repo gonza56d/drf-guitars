@@ -3,8 +3,6 @@ version: '3.8'
 volumes:
   local_postgres_data:
   local_mongo_data:
-  local_rabbit_data:
-  app_data:
 
 services:
 
@@ -39,7 +37,7 @@ services:
   api:
     build: .
     volumes:
-      - .:/app_data/
+      - .:/app/
     env_file:
       - .env
     ports:
