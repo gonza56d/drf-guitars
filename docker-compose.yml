@@ -1,0 +1,52 @@
+version: '3.8'
+
+volumes:
+  local_postgres_data:
+  local_mongo_data:
+  local_rabbit_data:
+  app_data:
+
+services:
+
+  postgres:
+    image: postgres:14.7
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+
+  mongo:
+    image: mongo:6.0.4
+    volumes:
+      - local_mongo_data:/data/db
+    env_file:
+      - .env
+    ports:
+      - "27017:27017"
+
+  redis:
+    image: redis:7.0.9
+    env_file:
+      - .env
+    ports:
+      - "6379:6379"
+
+  rabbit:
+    image: rabbitmq:3.11
+
+  api:
+    build: .
+    volumes:
+      - .:/app_data/
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    command: python manage.py runserver 0.0.0.0:8000 --settings=config.settings.local
+    depends_on:
+      - postgres
+      - mongo
+      - redis
+      - rabbit
